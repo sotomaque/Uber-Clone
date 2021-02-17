@@ -8,16 +8,16 @@
 import 'react-native-gesture-handler';
 
 import React from 'react';
-import { StatusBar, Text } from 'react-native';
-
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { SafeAreaView, StatusBar } from 'react-native';
+import HomeScreen from './src/screens/HomeScreen';
 
 const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <Text>Hi</Text>
-      <Icon name={'rocket'} size={30} />
+      <SafeAreaView>
+        <HomeScreen />
+      </SafeAreaView>
     </>
   );
 };
