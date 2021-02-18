@@ -40,6 +40,7 @@ const DestinationSearchScreen = (props) => {
             language: 'en',
           }}
           renderRow={(data) => <PlaceRow data={data} />}
+          renderDescription={(data) => data?.description || data?.vicinity}
         />
         {/* Destination Input */}
         <GooglePlacesAutocomplete
