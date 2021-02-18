@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { View, Dimensions } from 'react-native';
 import { useRoute } from '@react-navigation/native';
@@ -7,11 +8,11 @@ import UberTypes from '../../components/UberTypes';
 
 const SearchResults = (props) => {
   const route = useRoute();
-  console.log(route?.params);
+  const { originPlace = '', destinationPlace = '' } = route?.params;
   return (
     <View style={{ display: 'flex', justifyContent: 'space-between' }}>
       <View style={{ height: Dimensions.get('window').height - 400 }}>
-        <RouteMap />
+        <RouteMap origin={originPlace} destination={destinationPlace} />
       </View>
       <View style={{ height: 500 }}>
         <UberTypes />

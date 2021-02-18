@@ -3,37 +3,38 @@ import React from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
-const RouteMap = () => {
+const RouteMap = ({ origin, destination }) => {
   const GOOGLE_MAPS_API_KEY = 'AIzaSyCc2S9XzrUb4Xtz1sGGGbgZWe-m-qcNZzU';
 
-  const origin = {
-    latitude: 28.450627,
-    longitude: -16.263045,
+  const originLoc = {
+    latitude: origin.details.geometry.location.lat,
+    longitude: origin.details.geometry.location.lng,
   };
 
-  const destination = {
-    latitude: 28.450127,
-    longitude: -16.269045,
+  const destinationLoc = {
+    latitude: destination.details.geometry.location.lat,
+    longitude: destination.details.geometry.location.lng,
   };
+
   return (
     <MapView
       provider={PROVIDER_GOOGLE}
-      showsUserLocation
+      showsUserLocation={true}
       style={{ height: '100%', width: '100%' }}
       initialRegion={{
-        latitude: 28.450627,
-        longitude: -16.263045,
+        latitude: 47.624984,
+        longitude: -122.13339,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       }}>
       {/* From Marker */}
       <MapViewDirections
-        origin={origin}
-        destination={destination}
+        origin={originLoc}
+        destination={destinationLoc}
         apikey={GOOGLE_MAPS_API_KEY}
       />
-      <Marker coordinate={origin} title={'Origin'} />
-      <Marker coordinate={destination} title={'Destination'} />
+      <Marker coordinate={originLoc} title={'Origin'} />
+      <Marker coordinate={destinationLoc} title={'Destination'} />
     </MapView>
   );
 };
