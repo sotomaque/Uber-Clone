@@ -11,9 +11,7 @@ import React from 'react';
 import { StatusBar, PermissionsAndroid, Platform } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 
-import DestinationSearchScreen from './src/screens/DestinationSearchScreen';
-import SearchResultsScreen from './src/screens/SearchResultsScreen';
-import HomeScreen from './src/screens/HomeScreen';
+import Router from './src/navigation/Root';
 
 navigator.geolocation = require('@react-native-community/geolocation');
 
@@ -54,7 +52,7 @@ const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <DestinationSearchScreen />
+      <Router />
     </>
   );
 };

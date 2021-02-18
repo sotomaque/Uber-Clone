@@ -1,19 +1,34 @@
 import React from 'react';
 import { View, SafeAreaView } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import PlaceRow from './PlaceRow.js';
+import { useNavigation } from '@react-navigation/native';
 
+import PlaceRow from './PlaceRow.js';
 import styles from './styles.js';
 
-const DestinationSearchScreen = (props) => {
+const DestinationSearch = () => {
+  const navigation = useNavigation();
+
   const [originPlace, setOriginPlace] = React.useState(null);
   const [destinationPlace, setDestinationPlace] = React.useState(null);
 
   React.useEffect(() => {
     if (originPlace && destinationPlace) {
-      console.warn('Redirect to results');
+      navigation.navigate('SearchResults', {
+        originPlace,
+        destinationPlace,
+      });
     }
-  }, [originPlace, destinationPlace]);
+  }, [originPlace, destinationPlace, navigation]);
+
+  const home = {
+    description: 'Home',
+    geometry: { location: { lat: 47.624984, lng: -122.13339 } },
+  };
+  const work = {
+    description: 'Work',
+    geometry: { location: { lat: 47.669549, lng: -122.196904 } },
+  };
 
   return (
     <SafeAreaView>
@@ -41,6 +56,7 @@ const DestinationSearchScreen = (props) => {
           }}
           renderRow={(data) => <PlaceRow data={data} />}
           renderDescription={(data) => data?.description || data?.vicinity}
+          predefinedPlaces={[home, work]}
         />
         {/* Destination Input */}
         <GooglePlacesAutocomplete
@@ -61,6 +77,7 @@ const DestinationSearchScreen = (props) => {
             language: 'en',
           }}
           renderRow={(data) => <PlaceRow data={data} />}
+          predefinedPlaces={[home, work]}
         />
         {/* Line */}
         <View style={styles.circle} />
@@ -71,4 +88,4 @@ const DestinationSearchScreen = (props) => {
   );
 };
 
-export default DestinationSearchScreen;
+export default DestinationSearch;
