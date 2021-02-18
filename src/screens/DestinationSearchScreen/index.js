@@ -25,6 +25,7 @@ const DestinationSearchScreen = (props) => {
             setOriginPlace({ data, details });
           }}
           suppressDefaultStyles
+          enablePoweredByContainer={false}
           currentLocation={true}
           currentLocationLabel="Current location"
           styles={{
@@ -47,6 +48,7 @@ const DestinationSearchScreen = (props) => {
             setDestinationPlace({ data, details });
           }}
           suppressDefaultStyles
+          enablePoweredByContainer={false}
           styles={{
             textInput: styles.textInput,
             container: { ...styles.autoCompleteContainer, top: 55 },
@@ -59,6 +61,10 @@ const DestinationSearchScreen = (props) => {
           }}
           renderRow={(data) => <PlaceRow data={data} />}
         />
+        {/* Line */}
+        <View style={styles.circle} />
+        <View style={styles.line} />
+        <View style={styles.square} />
       </View>
     </SafeAreaView>
   );

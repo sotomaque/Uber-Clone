@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#eee',
     marginVertical: 5,
+    marginLeft: 20,
   },
   row: {
     flexDirection: 'row',
@@ -34,6 +35,32 @@ const styles = StyleSheet.create({
   listView: {
     position: 'absolute',
     top: 102,
+  },
+  circle: {
+    height: 5,
+    width: 5,
+    backgroundColor: 'black',
+    borderRadius: 5,
+    position: 'absolute',
+    top: 20,
+    left: 12,
+  },
+  line: {
+    height: 60,
+    width: 1,
+    backgroundColor: '#919191',
+    borderRadius: 5,
+    position: 'absolute',
+    top: 25,
+    left: 14,
+  },
+  square: {
+    height: 5,
+    width: 5,
+    backgroundColor: 'black',
+    position: 'absolute',
+    top: 80,
+    left: 12,
   },
 });
 
