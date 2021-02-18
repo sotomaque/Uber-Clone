@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   circle: {
     height: 5,
     width: 5,
-    backgroundColor: 'black',
+    backgroundColor: 'blue',
     borderRadius: 5,
     position: 'absolute',
     top: 20,

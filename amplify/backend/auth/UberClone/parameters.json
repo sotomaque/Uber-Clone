@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "uberclone140983fe_identitypool_140983fe",
+    "identityPoolName": "uberclone2a7fee06_identitypool_2a7fee06",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "ubercl140983fe",
-    "userPoolName": "uberclone140983fe_userpool_140983fe",
+    "resourceNameTruncated": "ubercl2a7fee06",
+    "userPoolName": "uberclone2a7fee06_userpool_2a7fee06",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -20,7 +20,7 @@
     "requiredAttributes": [
         "email"
     ],
-    "userpoolClientGenerateSecret": true,
+    "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
         "email"
@@ -28,17 +28,11 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "ubercl140983fe_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "UberCl2a7fee06_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "useDefault": "manual",
+    "sharedId": "2a7fee06",
+    "resourceName": "UberClone",
     "authSelections": "identityPoolAndUserPool",
-    "resourceName": "uberclone140983fe140983fe",
-    "thirdPartyAuth": false,
-    "userPoolGroups": false,
-    "adminQueries": false,
-    "triggers": "{\"PostConfirmation\":[\"custom\"]}",
-    "hostedUI": false,
-    "userPoolGroupList": [],
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -51,6 +45,15 @@
             "Arn"
         ]
     },
+    "useDefault": "manual",
+    "thirdPartyAuth": false,
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
+    "hostedUI": false,
+    "userPoolGroupList": [],
+    "serviceName": "Cognito",
+    "usernameCaseSensitive": false,
     "parentStack": {
         "Ref": "AWS::StackId"
     },
@@ -58,7 +61,7 @@
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "uberclone140983fe140983fePostConfirmation",
+            "resourceName": "UberClonePostConfirmation",
             "triggerProvider": "Cognito",
             "attributes": [
                 "Arn",
