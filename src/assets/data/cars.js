@@ -24,7 +24,7 @@ export default [
     id: '3',
     type: 'Comfort',
     latitude: 28.454812,
-    longitude:-16.258658,
+    longitude: -16.258658,
     heading: 120,
   },
 ];
