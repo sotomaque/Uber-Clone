@@ -35,7 +35,16 @@ const HomeMap = () => {
           }}>
           <Image
             source={getImage(car)}
-            style={{ width: 50, height: 50, resizeMode: 'contain' }}
+            style={{
+              width: 50,
+              height: 50,
+              resizeMode: 'contain',
+              transform: [
+                {
+                  rotate: `${car.heading}deg`,
+                },
+              ],
+            }}
           />
         </Marker>
       ))}
