@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "uberclone2a7fee06_identitypool_2a7fee06",
+    "identityPoolName": "uberclonef1692dcc_identitypool_f1692dcc",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "ubercl2a7fee06",
-    "userPoolName": "uberclone2a7fee06_userpool_2a7fee06",
+    "resourceNameTruncated": "uberclf1692dcc",
+    "userPoolName": "uberclonef1692dcc_userpool_f1692dcc",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "UberCl2a7fee06_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "uberclf1692dcc_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "2a7fee06",
-    "resourceName": "UberClone",
+    "sharedId": "f1692dcc",
+    "resourceName": "uberclonef1692dccf1692dcc",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -61,7 +61,7 @@
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "UberClonePostConfirmation",
+            "resourceName": "uberclonef1692dccf1692dccPostConfirmation",
             "triggerProvider": "Cognito",
             "attributes": [
                 "Arn",

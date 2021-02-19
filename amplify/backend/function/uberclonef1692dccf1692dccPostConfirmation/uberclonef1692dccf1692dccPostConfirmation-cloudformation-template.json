@@ -67,12 +67,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "UberClonePostConfirmation",
+            "uberclonef1692dccf1692dccPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "UberClonePostConfirmation",
+                  "uberclonef1692dccf1692dccPostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -122,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "UberClonePostConfirmation",
+            "uberclonef1692dccf1692dccPostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "UberClonePostConfirmation",
+                  "uberclonef1692dccf1692dccPostConfirmation",
                   "-",
                   {
                     "Ref": "env"

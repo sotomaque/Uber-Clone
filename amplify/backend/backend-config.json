@@ -1,19 +1,19 @@
 {
   "function": {
-    "UberClonePostConfirmation": {
+    "uberclonef1692dccf1692dccPostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "auth": {
-    "UberClone": {
+    "uberclonef1692dccf1692dcc": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "UberClonePostConfirmation",
+          "resourceName": "uberclonef1692dccf1692dccPostConfirmation",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",
@@ -33,7 +33,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authUberClone"
+              "userPoolId": "authuberclonef1692dccf1692dcc"
             }
           },
           "additionalAuthenticationProviders": []

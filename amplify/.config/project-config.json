@@ -1,11 +1,11 @@
 {
-  "projectName": "uberClone",
+  "projectName": "UberClone",
   "version": "3.0",
   "frontend": "javascript",
   "javascript": {
     "framework": "react-native",
     "config": {
-      "SourceDir": "src",
+      "SourceDir": "/",
       "DistributionDir": "/",
       "BuildCommand": "npm run-script build",
       "StartCommand": "npm run-script start"
