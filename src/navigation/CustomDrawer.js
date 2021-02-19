@@ -11,7 +11,7 @@ const CustomDrawer = (props) => {
   return (
     <DrawerContentScrollView {...props}>
       {/* Top (Dark) Drawer Part */}
-      <View style={{ backgroundColor: '#000', padding: 15 }}>
+      <View style={{ padding: 15 }}>
         {/* User Row */}
         <View
           style={{
@@ -54,7 +54,7 @@ const CustomDrawer = (props) => {
         <Pressable
           style={{ marginVertical: 10 }}
           onPress={() => console.log('lol')}>
-          <Text style={{ color: 'white' }}>Do More With Your Accoutn</Text>
+          <Text style={{ color: 'white' }}>Do More With Your Account</Text>
         </Pressable>
         {/* Make Money */}
         <Pressable
@@ -63,11 +63,15 @@ const CustomDrawer = (props) => {
           <Text style={{ color: 'white' }}>Make Money Driving</Text>
         </Pressable>
       </View>
-      <DrawerItemList {...props} />
-      {/* Make Money */}
-      <Pressable style={{ marginVertical: 10 }} onPress={() => Auth.signOut()}>
-        <Text style={{ padding: 5, paddingLeft: 20 }}>Logout</Text>
-      </Pressable>
+      <View style={{ backgroundColor: 'white', height: '120%' }}>
+        <DrawerItemList {...props} />
+        {/* Logout */}
+        <Pressable
+          style={{ marginVertical: 10 }}
+          onPress={() => Auth.signOut()}>
+          <Text style={{ padding: 5, paddingLeft: 20 }}>Logout</Text>
+        </Pressable>
+      </View>
     </DrawerContentScrollView>
   );
 };

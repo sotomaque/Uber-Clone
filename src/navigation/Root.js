@@ -9,7 +9,11 @@ import CustomDrawer from './CustomDrawer';
 const Drawer = createDrawerNavigator();
 
 const DummyScreen = (props) => (
-  <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+  <View
+    style={{
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}>
     <Text>{props.name}</Text>
   </View>
 );
@@ -17,7 +21,11 @@ const DummyScreen = (props) => (
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
+      <Drawer.Navigator
+        drawerContent={(props) => <CustomDrawer {...props} />}
+        drawerStyle={{
+          backgroundColor: 'black',
+        }}>
         <Drawer.Screen name={'Home'} component={StackNavigator} />
         <Drawer.Screen name={'Your Trips'}>
           {() => <DummyScreen name={'Your Trips'} />}
