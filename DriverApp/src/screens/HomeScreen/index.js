@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Dimensions,
@@ -11,6 +11,8 @@ import MapViewDirections from 'react-native-maps-directions';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import {NewRidePopUp} from '../../components';
+
 import styles from './styles';
 
 const windowWidth = Dimensions.get('window').width;
@@ -19,8 +21,14 @@ const windowHeight = Dimensions.get('window').height;
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCc2S9XzrUb4Xtz1sGGGbgZWe-m-qcNZzU';
 
 const HomeScreen = () => {
+  const [isOnline, setIsOnline] = useState(false);
   const origin = {latitude: 37.3318456, longitude: -122.0296002};
   const destination = {latitude: 37.771707, longitude: -122.4053769};
+
+  const onGoPress = () => {
+    setIsOnline(!isOnline);
+  };
+
   return (
     <View>
       <MapView
@@ -104,20 +112,23 @@ const HomeScreen = () => {
       </Pressable>
 
       {/* Go Round Button */}
-      <TouchableOpacity
-        style={styles.goButton}
-        onPress={() => {
-          console.log('pressed');
-        }}>
-        <Text style={styles.goButtonLabel}>Go</Text>
+      <TouchableOpacity style={styles.goButton} onPress={onGoPress}>
+        <Text style={styles.goButtonLabel}>{!isOnline ? 'GO' : 'End'}</Text>
       </TouchableOpacity>
 
       {/* Bottom Sheet */}
       <View style={styles.bottomContainer}>
         <Ionicons name="options-outline" size={24} color="#4a4a4a" />
-        <Text style={styles.bottomText}>You Are Offline</Text>
+        {isOnline ? (
+          <Text style={styles.bottomText}>You Are Online</Text>
+        ) : (
+          <Text style={styles.bottomText}>You Are Offline</Text>
+        )}
         <Entypo name="menu" size={24} color="#4a4a4a" />
       </View>
+
+      {/* New Ride Pop Up */}
+      <NewRidePopUp />
     </View>
   );
 };
