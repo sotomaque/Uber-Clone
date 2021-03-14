@@ -1,7 +1,17 @@
 import React from 'react';
-import {View, Dimensions} from 'react-native';
+import {
+  View,
+  Dimensions,
+  Text,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import styles from './styles';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -14,11 +24,12 @@ const HomeScreen = () => {
   return (
     <View>
       <MapView
-        style={{width: windowWidth, height: windowHeight}}
+        showsUserLocation
+        style={{width: windowWidth, height: windowHeight - 150}}
         provider={PROVIDER_GOOGLE}
         initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
+          latitude: 47.624984,
+          longitude: -122.13339,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}>
@@ -28,6 +39,85 @@ const HomeScreen = () => {
           apikey={GOOGLE_MAPS_APIKEY}
         />
       </MapView>
+      {/* Balance */}
+      <Pressable
+        style={styles.balanceButton}
+        onPress={() => {
+          console.log('pressed');
+        }}>
+        <Text style={styles.balanceLabel}>
+          <Text style={{color: 'grey'}}>$</Text> 0.00
+        </Text>
+      </Pressable>
+      {/* Corner Buttons */}
+      <Pressable
+        style={[
+          styles.roundButton,
+          {
+            top: 35,
+            left: 15,
+          },
+        ]}
+        onPress={() => {
+          console.log('pressed');
+        }}>
+        <Ionicons name="options-outline" size={24} color="#4a4a4a" />
+      </Pressable>
+      <Pressable
+        style={[
+          styles.roundButton,
+          {
+            top: 35,
+            right: 15,
+          },
+        ]}
+        onPress={() => {
+          console.log('pressed');
+        }}>
+        <Ionicons name="options-outline" size={24} color="#4a4a4a" />
+      </Pressable>
+      <Pressable
+        style={[
+          styles.roundButton,
+          {
+            bottom: 110,
+            left: 15,
+          },
+        ]}
+        onPress={() => {
+          console.log('pressed');
+        }}>
+        <Ionicons name="options-outline" size={24} color="#4a4a4a" />
+      </Pressable>
+      <Pressable
+        style={[
+          styles.roundButton,
+          {
+            bottom: 110,
+            right: 15,
+          },
+        ]}
+        onPress={() => {
+          console.log('pressed');
+        }}>
+        <Ionicons name="options-outline" size={24} color="#4a4a4a" />
+      </Pressable>
+
+      {/* Go Round Button */}
+      <TouchableOpacity
+        style={styles.goButton}
+        onPress={() => {
+          console.log('pressed');
+        }}>
+        <Text style={styles.goButtonLabel}>Go</Text>
+      </TouchableOpacity>
+
+      {/* Bottom Sheet */}
+      <View style={styles.bottomContainer}>
+        <Ionicons name="options-outline" size={24} color="#4a4a4a" />
+        <Text style={styles.bottomText}>You Are Offline</Text>
+        <Entypo name="menu" size={24} color="#4a4a4a" />
+      </View>
     </View>
   );
 };
