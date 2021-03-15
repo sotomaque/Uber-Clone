@@ -5,14 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles';
 
-const NewRidePopUp = () => {
-  const onDecline = () => {
-    console.warn('DECLINED');
-  };
-  const onAccept = () => {
-    console.warn('onAccept');
-  };
-
+const NewRidePopUp = ({newOrder, onAccept, onDecline, duration, distance}) => {
   return (
     <View style={styles.root}>
       <Pressable style={styles.declineButton} onPress={onDecline}>
@@ -21,18 +14,19 @@ const NewRidePopUp = () => {
       <Pressable style={styles.popupContainer} onPress={onAccept}>
         {/* Top Row */}
         <View style={styles.row}>
-          <Text style={styles.uberType}>UberX</Text>
+          <Text style={styles.uberType}>{newOrder.type}</Text>
           <View style={styles.userBackground}>
             <FontAwesome name="user" color="white" size={35} />
           </View>
           <Text style={styles.uberType}>
-            <AntDesign name="staro" size={18} color="white" />5
+            <AntDesign name="staro" size={18} color="white" />
+            {newOrder.user.rating}
           </Text>
         </View>
 
         {/* ETA */}
-        <Text style={styles.min}>2 min</Text>
-        <Text style={styles.distance}>0.4 mi</Text>
+        <Text style={styles.min}>{duration} min</Text>
+        <Text style={styles.distance}>{distance} mi</Text>
       </Pressable>
     </View>
   );
