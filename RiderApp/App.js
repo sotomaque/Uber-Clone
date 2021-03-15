@@ -10,13 +10,14 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { StatusBar, PermissionsAndroid, Platform } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
+
 import { withAuthenticator } from 'aws-amplify-react-native';
 
 import Router from './src/navigation/Root';
 
 navigator.geolocation = require('@react-native-community/geolocation');
 
-import Amplify from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify';
 import config from './aws-exports';
 Amplify.configure(config);
 
