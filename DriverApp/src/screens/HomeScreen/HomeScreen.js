@@ -30,19 +30,34 @@ const HomeScreen = () => {
   const [car, setCar] = useState(null);
   const [myPosition, setMyPostion] = useState(null);
   const [order, setOrder] = useState(null);
-  const [newOrder, setNewOrder] = useState({
-    id: '1',
-    type: 'UberX',
-    originLatitude: 47.684984,
-    originLongitude: -122.12139,
-    destLatitude: 47.984984,
-    destLongitude: -122.16139,
-    user: {
-      name: 'Enrique',
-      rating: 4.98,
+  const [newOrders, setNewOrders] = useState([
+    {
+      id: '1',
+      type: 'UberX',
+      originLatitude: 47.684984,
+      originLongitude: -122.12139,
+      destLatitude: 47.984984,
+      destLongitude: -122.16139,
+      user: {
+        name: 'Enrique',
+        rating: 4.98,
+      },
     },
-  });
+    {
+      id: '2',
+      type: 'UberBlack',
+      originLatitude: 47.634984,
+      originLongitude: -122.14139,
+      destLatitude: 47.994984,
+      destLongitude: -122.41139,
+      user: {
+        name: 'James',
+        rating: 3.98,
+      },
+    },
+  ]);
 
+  // Query users car data -> set it in local state variable
   const fetchCar = async () => {
     try {
       const userData = await Auth.currentAuthenticatedUser();
@@ -81,11 +96,12 @@ const HomeScreen = () => {
 
   const onAccept = acceptedOrder => {
     setOrder(acceptedOrder);
-    setNewOrder(null);
+    setNewOrders(newOrders.filter((_, i) => i > 0));
   };
 
   const onDecline = () => {
-    setNewOrder(null);
+    // remove front of array
+    setNewOrders(newOrders.filter((_, i) => i > 0));
   };
 
   const renderBottomTitle = () => {
@@ -304,11 +320,11 @@ const HomeScreen = () => {
       </View>
 
       {/* New Ride Pop Up */}
-      {newOrder && (
+      {newOrders.length > 0 && !order && (
         <NewRidePopUp
-          newOrder={newOrder}
+          newOrder={newOrders[0]}
           onDecline={onDecline}
-          onAccept={() => onAccept(newOrder)}
+          onAccept={() => onAccept(newOrders[0])}
           duration={2}
           distance={0.5}
         />
