@@ -27,12 +27,12 @@ const windowHeight = Dimensions.get('window').height;
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCc2S9XzrUb4Xtz1sGGGbgZWe-m-qcNZzU';
 
 const HomeScreen = () => {
-  const [car, setCar] = useState(null);
-  const [myPosition, setMyPostion] = useState(null);
-  const [order, setOrder] = useState(null);
-  const [newOrders, setNewOrders] = useState([]);
+  const [car, setCar] = useState(null); // user car state to be retrieved from db
+  const [myPosition, setMyPostion] = useState(null); // position to be set by device
+  const [order, setOrder] = useState(null); // accepted order
+  const [newOrders, setNewOrders] = useState([]); // queue of riders waiting for a ride retrieved from db
 
-  // Query users car data -> set it in local state variable
+  // Query users car data -> set it in local state variable (car)
   const fetchCar = async () => {
     try {
       const userData = await Auth.currentAuthenticatedUser();
@@ -45,9 +45,12 @@ const HomeScreen = () => {
     }
   };
 
+  // Query orders -> set themin local state variable (newOrders)
   const fetchOrders = async () => {
     try {
-      const orders = await API.graphql(graphqlOperation(listOrders));
+      const orders = await API.graphql(
+        graphqlOperation(listOrders, {filter: {status: {eq: 'New'}}}),
+      );
       console.log('ORDERS', orders.data.listOrders.items);
       setNewOrders(orders.data.listOrders.items);
     } catch (error) {
@@ -55,11 +58,13 @@ const HomeScreen = () => {
     }
   };
 
+  // On Mount Effect
   useEffect(() => {
     fetchCar();
     fetchOrders();
   }, []);
 
+  //
   const onGoPress = async () => {
     // update car.isActive
     try {

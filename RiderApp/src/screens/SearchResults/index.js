@@ -34,6 +34,7 @@ const SearchResults = (props) => {
         userId: userInfo.attributes.sub,
         carId: '1',
         createdAt: date.toISOString(),
+        status: 'New',
       };
       const res = await API.graphql(
         graphqlOperation(createOrder, {
