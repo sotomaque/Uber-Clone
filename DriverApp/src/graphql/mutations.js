@@ -9,11 +9,13 @@ export const createCar = /* GraphQL */ `
       latitude
       longitude
       heading
+      isActive
       orders {
         items {
           id
           createdAt
           type
+          status
           originLatitude
           originLongitude
           destLatitude
@@ -24,6 +26,26 @@ export const createCar = /* GraphQL */ `
         }
         nextToken
       }
+      userId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const updateCar = /* GraphQL */ `
+  mutation UpdateCar(
+    $input: UpdateCarInput!
+    $condition: ModelCarConditionInput
+  ) {
+    updateCar(input: $input, condition: $condition) {
+      id
+      type
+      latitude
+      longitude
+      heading
+      isActive
+      userId
       createdAt
       updatedAt
     }

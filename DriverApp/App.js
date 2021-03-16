@@ -14,7 +14,7 @@ import {withAuthenticator} from 'aws-amplify-react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import {createCar} from './src/graphql/mutations';
-import {getCarById} from './src/graphql/queries';
+import {getCarId} from './src/graphql/queries';
 import HomeScreen from './src/screens/HomeScreen';
 
 Amplify.configure({
@@ -42,7 +42,7 @@ const App = () => {
       let carData;
       try {
         carData = await API.graphql(
-          graphqlOperation(getCarById, {
+          graphqlOperation(getCarId, {
             id: authUser.attributes.sub,
           }),
         );
@@ -53,7 +53,7 @@ const App = () => {
 
       // if not, create a new car for user
       if (carData.data.getCar) {
-        console.log('USER ALREADY HAS CAR ASSIGNED');
+        console.log('USER ALREADY HAS CAR ASSIGNED', carData.data.getCar);
         return;
       } else {
         const newCar = {

@@ -17,13 +17,17 @@ import {NewRidePopUp} from '../../components';
 
 import styles from './styles';
 
+import {API, graphqlOperation, Auth} from 'aws-amplify';
+import {getCar} from '../../graphql/queries';
+import {updateCar} from '../../graphql/mutations';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCc2S9XzrUb4Xtz1sGGGbgZWe-m-qcNZzU';
 
 const HomeScreen = () => {
-  const [isOnline, setIsOnline] = useState(false);
+  const [car, setCar] = useState(null);
   const [myPosition, setMyPostion] = useState(null);
   const [order, setOrder] = useState(null);
   const [newOrder, setNewOrder] = useState({
@@ -39,8 +43,40 @@ const HomeScreen = () => {
     },
   });
 
-  const onGoPress = () => {
-    setIsOnline(!isOnline);
+  const fetchCar = async () => {
+    try {
+      const userData = await Auth.currentAuthenticatedUser();
+      const carData = await API.graphql(
+        graphqlOperation(getCar, {id: userData.attributes.sub}),
+      );
+      setCar(carData.data.getCar);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCar();
+  }, []);
+
+  const onGoPress = async () => {
+    // update car.isActive
+    try {
+      const userData = await Auth.currentAuthenticatedUser();
+      console.log('userData', userData);
+      const input = {
+        id: userData.attributes.sub,
+        isActive: !car.isActive,
+      };
+      const updatedCarData = await API.graphql(
+        graphqlOperation(updateCar, {
+          input,
+        }),
+      );
+      setCar(updatedCarData.data.updateCar);
+    } catch (error) {
+      console.error('error updating car.isActive');
+    }
   };
 
   const onAccept = acceptedOrder => {
@@ -126,7 +162,7 @@ const HomeScreen = () => {
     }
 
     // labels for when we dont have a rider
-    if (isOnline) {
+    if (car?.isActive) {
       return <Text style={styles.bottomText}>You Are Online</Text>;
     } else {
       return <Text style={styles.bottomText}>You Are Offline</Text>;
@@ -255,7 +291,9 @@ const HomeScreen = () => {
 
       {/* Go Round Button */}
       <TouchableOpacity style={styles.goButton} onPress={onGoPress}>
-        <Text style={styles.goButtonLabel}>{!isOnline ? 'GO' : 'End'}</Text>
+        <Text style={styles.goButtonLabel}>
+          {!car?.isActive ? 'GO' : 'End'}
+        </Text>
       </TouchableOpacity>
 
       {/* Bottom Sheet */}
