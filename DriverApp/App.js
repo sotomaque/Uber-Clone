@@ -7,13 +7,8 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  useColorScheme,
-} from 'react-native';
-import Amplify from 'aws-amplify';
+import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import Amplify, {Auth, API, graphqlOperation} from 'aws-amplify';
 import config from './aws-exports';
 import {withAuthenticator} from 'aws-amplify-react-native';
 
