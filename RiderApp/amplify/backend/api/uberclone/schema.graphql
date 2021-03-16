@@ -1,7 +1,9 @@
 type User @model {
   id: ID!
+  name: String
   username: String!
   email: String!
+  rating: Float
 
   orders: [Order] @connection(keyName: "byUser", fields: ["id"])
   car: Car @connection(fields: ["id"])

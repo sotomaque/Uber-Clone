@@ -5,13 +5,16 @@ export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
+      name
       username
       email
+      rating
       orders {
         items {
           id
           createdAt
           type
+          status
           originLatitude
           originLongitude
           destLatitude
@@ -21,6 +24,29 @@ export const getUser = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      car {
+        id
+        type
+        latitude
+        longitude
+        heading
+        isActive
+        orders {
+          nextToken
+        }
+        userId
+        user {
+          id
+          name
+          username
+          email
+          rating
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -36,10 +62,23 @@ export const listUsers = /* GraphQL */ `
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        name
         username
         email
+        rating
         orders {
           nextToken
+        }
+        car {
+          id
+          type
+          latitude
+          longitude
+          heading
+          isActive
+          userId
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -56,11 +95,13 @@ export const getCar = /* GraphQL */ `
       latitude
       longitude
       heading
+      isActive
       orders {
         items {
           id
           createdAt
           type
+          status
           originLatitude
           originLongitude
           destLatitude
@@ -70,6 +111,30 @@ export const getCar = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      userId
+      user {
+        id
+        name
+        username
+        email
+        rating
+        orders {
+          nextToken
+        }
+        car {
+          id
+          type
+          latitude
+          longitude
+          heading
+          isActive
+          userId
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -89,8 +154,19 @@ export const listCars = /* GraphQL */ `
         latitude
         longitude
         heading
+        isActive
         orders {
           nextToken
+        }
+        userId
+        user {
+          id
+          name
+          username
+          email
+          rating
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -105,6 +181,7 @@ export const getOrder = /* GraphQL */ `
       id
       createdAt
       type
+      status
       originLatitude
       originLongitude
       destLatitude
@@ -112,10 +189,23 @@ export const getOrder = /* GraphQL */ `
       userId
       user {
         id
+        name
         username
         email
+        rating
         orders {
           nextToken
+        }
+        car {
+          id
+          type
+          latitude
+          longitude
+          heading
+          isActive
+          userId
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -127,8 +217,19 @@ export const getOrder = /* GraphQL */ `
         latitude
         longitude
         heading
+        isActive
         orders {
           nextToken
+        }
+        userId
+        user {
+          id
+          name
+          username
+          email
+          rating
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -148,6 +249,7 @@ export const listOrders = /* GraphQL */ `
         id
         createdAt
         type
+        status
         originLatitude
         originLongitude
         destLatitude
@@ -155,8 +257,10 @@ export const listOrders = /* GraphQL */ `
         userId
         user {
           id
+          name
           username
           email
+          rating
           createdAt
           updatedAt
         }
@@ -167,6 +271,8 @@ export const listOrders = /* GraphQL */ `
           latitude
           longitude
           heading
+          isActive
+          userId
           createdAt
           updatedAt
         }
