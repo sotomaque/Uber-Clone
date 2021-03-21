@@ -14,9 +14,10 @@ const HomeMap = () => {
     const fetchCars = async () => {
       try {
         const res = await API.graphql(graphqlOperation(listCars));
+        console.log('res', res);
         setCars(res.data.listCars.items);
       } catch (e) {
-        console.error(e);
+        console.error('Error fetching cars', e);
       }
     };
 

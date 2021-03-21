@@ -56,6 +56,7 @@ const App = () => {
         console.log('USER ALREADY HAS CAR ASSIGNED', carData.data.getCar);
         return;
       } else {
+        console.log('CREATING A CAR FOR NEW DRIVER');
         const newCar = {
           id: authUser.attributes.sub,
           type: 'UberX',

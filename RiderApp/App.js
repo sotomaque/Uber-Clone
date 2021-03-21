@@ -17,9 +17,15 @@ import Router from './src/navigation/Root';
 
 navigator.geolocation = require('@react-native-community/geolocation');
 
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import config from './aws-exports';
-Amplify.configure(config);
+
+Amplify.configure({
+  ...config,
+  Analytics: {
+    disabled: true,
+  },
+});
 
 const App: () => React$Node = () => {
   // LOCATION PERMISSIONS
