@@ -47,6 +47,7 @@ export const getCar = /* GraphQL */ `
     }
   }
 `;
+
 export const listOrders = /* GraphQL */ `
   query ListOrders(
     $filter: ModelOrderFilterInput

@@ -12,6 +12,11 @@ export const onOrderUpdated = /* GraphQL */ `
       userId
       carId
       updatedAt
+      user {
+        id
+        username
+        name
+      }
     }
   }
 `;

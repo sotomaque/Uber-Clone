@@ -70,7 +70,6 @@ const OrderScreen = () => {
     if (!order?.carId || order.carId === '1') {
       return;
     }
-    console.log('ORDER CAR ID', order.carId);
     const subscription = API.graphql(
       graphqlOperation(onCarUpdated, { id: order.carId }),
     ).subscribe({

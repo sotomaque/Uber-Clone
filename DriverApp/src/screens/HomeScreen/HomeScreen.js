@@ -19,7 +19,7 @@ import styles from './styles';
 
 import {API, graphqlOperation, Auth} from 'aws-amplify';
 import {getCar, listOrders} from '../../graphql/queries';
-import {updateCar} from '../../graphql/mutations';
+import {updateCar, updateOrder} from '../../graphql/mutations';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -85,8 +85,23 @@ const HomeScreen = () => {
     }
   };
 
-  const onAccept = acceptedOrder => {
-    setOrder(acceptedOrder);
+  const onAccept = async newOrder => {
+    // update order status in backend
+    try {
+      const input = {
+        id: newOrder.id,
+        status: 'PICKING_UP_CLIENT',
+        carId: car.id,
+      };
+      const orderData = await API.graphql(
+        graphqlOperation(updateOrder, {
+          input,
+        }),
+      );
+      setOrder(orderData.data.updateOrder);
+    } catch (error) {
+      console.error('ERROR ACCEPTING RIDE', error);
+    }
     setNewOrders(newOrders.filter((_, i) => i > 0));
   };
 
@@ -199,7 +214,10 @@ const HomeScreen = () => {
 
   const onDirectionsFound = event => {
     console.log('eventd', event.distance);
-    order &&
+    if (order) {
+      // update order status in db
+
+      // update local state
       setOrder({
         ...order,
         distance: event.distance,
@@ -210,6 +228,7 @@ const HomeScreen = () => {
         isPickedUp: order.isPickedUp || event.distance < 0.2,
         isRideCompleted: order.isPickedUp && event.distance < 0.2,
       });
+    }
   };
 
   const getDestination = () => {
