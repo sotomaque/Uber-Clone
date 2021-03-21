@@ -118,6 +118,7 @@ const HomeScreen = () => {
         </View>
       );
     }
+
     // Label when we are in the middle of giving a rider a ride
     if (order && order.isPickedUp) {
       return (
@@ -176,8 +177,24 @@ const HomeScreen = () => {
     }
   };
 
-  const onUserLocationChange = event => {
+  const onUserLocationChange = async event => {
     setMyPostion(event.nativeEvent.coordinate);
+    const {latitude, longitude, heading} = event.nativeEvent.coordinate;
+    try {
+      const userData = await Auth.currentAuthenticatedUser();
+      const input = {
+        id: userData.attributes.sub,
+        latitude,
+        longitude,
+        heading,
+      };
+      const updatedCarData = await API.graphql(
+        graphqlOperation(updateCar, {input}),
+      );
+      setCar(updatedCarData.data.updateCar);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onDirectionsFound = event => {
@@ -226,7 +243,7 @@ const HomeScreen = () => {
             onReady={onDirectionsFound}
             strokeWidth={5}
             strokeColor="black"
-            origin={myPosition}
+            origin={{latitude: car?.latitude, longitude: car?.longitude}}
             destination={getDestination()}
             apikey={GOOGLE_MAPS_APIKEY}
           />
