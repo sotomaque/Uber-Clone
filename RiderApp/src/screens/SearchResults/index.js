@@ -24,7 +24,6 @@ const SearchResults = (props) => {
     // submit ride request to server
     try {
       const userInfo = await Auth.currentAuthenticatedUser();
-      console.log(userInfo);
       const input = {
         type,
         originLatitude: originPlace.details.geometry.location.lat,
@@ -42,12 +41,7 @@ const SearchResults = (props) => {
         }),
       );
       console.log(res);
-      Alert.alert('Yay!', 'Your ride has been booked', [
-        {
-          text: 'Go Home',
-          onPress: () => navigation.navigate('Home'),
-        },
-      ]);
+      navigation.navigate('OrderPage', { id: res.data.createOrder.id });
     } catch (error) {
       console.error('Error creating order', error);
     }

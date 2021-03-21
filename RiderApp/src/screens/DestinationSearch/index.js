@@ -19,7 +19,7 @@ const DestinationSearch = () => {
         destinationPlace,
       });
     }
-  }, [originPlace, destinationPlace, navigation]);
+  }, [originPlace, destinationPlace, navigation.navigate]);
 
   const home = {
     description: 'Home',
